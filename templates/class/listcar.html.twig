@@ -1,0 +1,19 @@
+
+
+<table border="1">
+  <tr>
+    <th>id</th>
+    <th>Nom</th>
+    <th>Description</th>
+  </tr>
+  {% for car in cars %}
+  <tr>
+    <td>{{car.id}}</td>
+    <td>{{car.nom}}</td>
+    <td>{{car.description}}</td>
+     <td><form action="{{path('app_update',{'id':car.id})}}"><button type="submit" >update</button></form></td>
+     <td><form action="{{path('app_supprimer',{'id':car.id})}}"><button type="submit" >supprimer</button></form></td>
+     
+  {%endfor%}
+
+</table>

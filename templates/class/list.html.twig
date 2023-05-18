@@ -1,0 +1,46 @@
+<p>{{st}}<p>
+
+
+{%set maxvalue = 0%}
+{%for c in fr %}
+{%set maxvalue = max(c.nb_participants,maxvalue)%}
+{%endfor%}
+
+<table border = "1">
+  <tr>
+    <td>ref</td>
+    <td>titre</td>
+    <td>description</td>
+    <td>date debut </td>
+    <td>date fin </td>
+    <td>nbr des participant</td>
+  <tr>
+    {% set s = 0%}
+  {% for i in fr %}
+  {% set s = s+ i.nb_participants %}
+  <tr>
+    {% if i.Description =='formation theorique' %}
+    <td>{{i.ref}}</td>
+    <td>{{i.Titre|upper}}</td>
+    <td>{{i.Description}}</td>
+    <td>{{i.date_debut}} </td>
+    <td>{{i.date_fin}}</td>
+    <td>{{i.nb_participants}}</td>
+    <td>
+      {% if i.nb_participants == 0 %}
+      <form action="{{path('app_list',{'id':i.ref})}}"><input type="submit" value="Participer" ></form> 
+      {%else%}
+      <input type="submit" value="Participer" disabled>
+      {%endif%}
+    </td>
+      
+    {%else%}
+    error
+    {% endif %}
+  <tr>
+
+  {% endfor %}
+</table>
+<p> nbrs des lignes : {{fr | length}}</p>
+<p> nbrs des participant max : {{maxvalue}}</p>
+<p> somme  des participant  : {{s}}</p>
